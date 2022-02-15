@@ -6,6 +6,7 @@ const Register = () => {
     const [username, setUsername] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const navigate = useNavigate();
 
     const registerUser = async (event) => {
         event.preventDefault();
@@ -23,10 +24,13 @@ const Register = () => {
             }
         )
         const data = await response.JSON()
-        console.log(data)
+
+        if (data.status === "ok") {
+            navigate('/login')
+        }
     }
 
-    const navigate = useNavigate();
+
     return (
         <div style={style.container} >
             <div style={style.form} >

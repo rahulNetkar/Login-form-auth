@@ -5,6 +5,7 @@ const Login = () => {
 
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
+    const navigate = useNavigate();
 
     const loginUser = async (event) => {
         event.preventDefault();
@@ -21,10 +22,16 @@ const Login = () => {
         });
 
         const data = await response.json();
+        if (data.user) {
+            localStorage.setItem('token', data.user)
+            alert("Login Successful")
+            navigate('/dashboard')
+        }
+        else {
+            alert("Please check your username and password")
+        }
         console.log(data);
     }
-
-    const navigate = useNavigate();
     return (
         <div style={style.container} >
             <div style={style.form} >
